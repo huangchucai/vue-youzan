@@ -16,15 +16,16 @@ import 'swiper/dist/css/swiper.css'
 export default {
   name:'swiper-banner',
   props: {
-    lists: {
-      type: Array,
-      required: true
-    },
+    // lists: {
+    //   type: Array,
+    //   required: true
+    // },
+    lists: {},
     name: {}
   },
   // swiper必须要依赖dom
   mounted() {
-    this.init();
+    // this.init();
     // new Swiper('.swiper-container',{
     //   loop: true,
     //   pagination: '.swiper-pagination',
@@ -38,6 +39,19 @@ export default {
         pagination: '.swiper-pagination',
         autoplay: 2000
      })
+    }
+  },
+  watch: {
+    lists(val,oldval){
+      console.log(document.querySelector('.swiper-container'))
+      console.log(`val++++${val}`);
+      this.$nextTick(() => {
+        if(val){
+          this.init();
+        }
+        console.log(document.querySelector('.swiper-slide'))
+      })
+      console.log(`oldval++++${oldval}`);
     }
   }
 }

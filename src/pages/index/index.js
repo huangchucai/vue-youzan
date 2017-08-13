@@ -49,7 +49,7 @@ new Vue({
     },
     getBanner() {
       axios.get(url.banner).then((res) => {
-        this.bannerLists = res.data.lists || [];     
+        this.bannerLists = res.data.lists || [];   
       })
     }
   },
