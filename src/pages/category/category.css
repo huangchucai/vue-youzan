@@ -396,7 +396,8 @@ only screen and (min-device-pixel-ratio:1.5) {
 }
 
 .custom-search {
-  position: absolute;
+  /*position: absolute;*/
+  position: fixed;
   top: 0;
   left: 0;
   padding: 6px 15px;
@@ -794,7 +795,7 @@ html {
 
 .inner-content {
   width: 100%;
-  margin-bottom: 50px;
+  margin-bottom: 60px;
 }
 
 .inner-content,
@@ -837,6 +838,8 @@ only screen and (min-device-pixel-ratio:1.5) {
 .main-content {
   height: 100%;
   overflow-y: scroll;
+  /*-webkit-overflow-scrolling: touch;*/
+  /*-ms-overflow-style: -ms-autohiding-scrollbar;*/
 }
 
 .main-content .category-title {
