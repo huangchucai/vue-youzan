@@ -20,10 +20,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <!--<link rel="stylesheet" href="./css/common.css">-->
   <!--<link rel="stylesheet" href="./css/category.css">-->
+  <style>
+    [v-cloak] {
+      display: none
+    }
+  </style>
 </head>
 
 <body class=" " style="">
-  <div id="app">
+  <div id="app" v-cloak>    
     <div class="container with-bottom-nav" style="min-height: 667px; height: 667px;">
       <div class="custom-search js-search-bar">
         <form>
@@ -56,10 +61,13 @@
             <ul class="nav" id="scroll-nav-content" style="height: 540px; transform: translate3d(0px, 0px, 0px);">
               <li class="category-name js-category-name" :class="{active: index === topIndex}" :data-cid="list.id" v-for="(list,index) in topLists" 
               @click="getSubLists(list.id,index)">{{list.name}}</li>
+            </ul>
           </div>
         </div>
+        
         <div class="class-category">
           <div id="scroll-main-wrap" class="main-content">
+            <!--综合排行-->
             <div id="scroll-main-content" class="js-main-content inner-content" style="height: 943px; transform: translate3d(0px, 0px, 0px);" v-if="topIndex ===0 ">
               <div class="hot-wrap">
                 <div class="hot-goods">
@@ -118,23 +126,23 @@
                 </div>
               </div>
             </div>
+            <!--其他分类一级分类-->
             <div id="scroll-main-content" class="js-main-content inner-content" style="height: 534px; transform: translate3d(0px, 0px, 0px);" v-if="topIndex !== 0">
               <h3 class="category-title">热门品牌 </h3>
-              <ul class="category-content">
-                <li class="category-item js-category-item" :data-item-id="brand.id" :data-item-name="brand.name" v-for="brand in subLists.brandList">
+              <ul class="category-content" v-if="subLists && subLists.brandList.length">
+                <li @click="toSearch(brand)" class="category-item js-category-item" :data-item-id="brand.id" :data-item-name="brand.name" v-for="brand in subLists.brandList">
                   <img :src="brand.image" :alt="brand.name" class="category-img">
                   <span class="category-item-name">{{brand.name}}</span>
                 </li>
               </ul>
               <h3 class="category-title"> 热门分类  </h3>
-              <ul class="category-content">
-                <li v-for="category in subLists.categoryList" class="category-item js-category-item" :data-item-id="category.id" :data-item-name="category.name">
+              <ul class="category-content" v-if="subLists && subLists.categoryList.length">
+                <li @click="toSearch(brand)" v-for="category in subLists.categoryList" class="category-item js-category-item" :data-item-id="category.id" :data-item-name="category.name">
                   <img :src="category.image" :alt="category.name" class="category-img">
                   <span class="category-item-name">{{category.name}}</span>
                 </li>
               </ul>
-            </div>
-          
+            </div>      
           </div>
         </div>
       </div>

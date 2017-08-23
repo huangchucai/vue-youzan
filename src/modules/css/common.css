@@ -392,7 +392,7 @@ hr.left-10 {
 only screen and (min--moz-device-pixel-ratio:1.5),
 only screen and (min-device-pixel-ratio:1.5) {
   .loading {
-    background-image: url(/v2/image/loader@2x.gif)!important
+    background-image: url(https://b.yzcdn.cn/v2/image/loader@2x.gif)!important
   }
 }
 

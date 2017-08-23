@@ -5,6 +5,7 @@ import Vue from 'vue'
 import axios from 'axios'
 import url from 'js/api.js'
 import mint from 'mint-ui'
+import { Spinner } from 'mint-ui';
 Vue.use(mint)
 
 import foot from 'components/Foot.vue'
@@ -44,6 +45,10 @@ new Vue({
       axios.post(url.rank).then((res) => {
         this.rankLists = res.data.data
       })
+    },
+    // 跳转到搜索页面
+    toSearch(item){
+      location.href = `search.html?keyword=${item.name}&id=${item.id}`
     }  
   },
   components: {
