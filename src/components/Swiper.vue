@@ -43,15 +43,11 @@ export default {
   },
   watch: {
     lists(val,oldval){
-      console.log(document.querySelector('.swiper-container'))
-      console.log(`val++++${val}`);
       this.$nextTick(() => {
         if(val){
           this.init();
         }
-        console.log(document.querySelector('.swiper-slide'))
       })
-      console.log(`oldval++++${oldval}`);
     }
   }
 }

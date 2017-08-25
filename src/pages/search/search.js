@@ -9,7 +9,7 @@ import animate from 'velocity-animate'
 import qs from 'qs';
 const {keyword,id} = qs.parse(location.search.substring(1))
 new Vue({
-  el:'.container',
+  el:'.search-container',
   data() {
     return {
       searchList: null,
