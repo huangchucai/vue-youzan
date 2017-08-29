@@ -3,6 +3,7 @@ import './goods_custom.css'
 import './goods_mars.css'
 import './goods_sku.css'
 import './goods_theme.css'
+import './goods_transition.css'
 import './goods.css'
 
 import Vue from 'vue'
@@ -25,7 +26,9 @@ new Vue({
       currentIndex: null,
       detailTab,
       dealLists: null,
-      dealIndex: 0
+      dealIndex: 0,
+      isAddCart:false,
+      showMessage: false
     }
   },
   created() {
@@ -75,6 +78,18 @@ new Vue({
     },
     showTab(idx){
       this.dealIndex = idx;
+    },
+    addCart(){
+      axios.post(url.add, {id,number: this.skuNum}).then((res) => {
+        if(res.data.status === 200) {
+          this.showMessage = true
+          this.showSku = false
+          this.isAddCart = true
+          setTimeout(() => {
+            this.showMessage = false
+          },1000)
+        }
+      })
     }
   },
   components: {
