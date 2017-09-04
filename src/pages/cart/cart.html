@@ -26,7 +26,7 @@
           <div>
             <div class="js-shop-list shop-list">
               <!--第一个店铺-->
-              <div v-for="(shop,shopIndex) in cartDetail" class="block block-order block-cart">
+              <div v-for="(shop,shopIndex) in cartList" class="block block-order block-cart">
                 <div class="header">
                   <div class="select-group js-select-group" @click="chooseShop(shop)">
                     <!--店铺选择按钮-->
@@ -42,7 +42,7 @@
                 <!---->
                 <div>
                   <ul class="js-list block block-list block-list-cart border-0">
-                    <li class="block-item block-item-cart" :class="{editing: shop.editing}" v-for="(goods,goodsIndex) in shop.goodsList">
+                    <li :ref="'goods-'+shopIndex+'-'+goodsIndex" :key="goods.id" @touchstart="start($event,goods)" @touchend="end($event,shopIndex,goods,goodsIndex)" class="block-item block-item-cart" :class="{editing: shop.editing}" v-for="(goods,goodsIndex) in shop.goodsList">
                       <div>
                         <div class="check-container" @click="chooseGoods(shop,goods)">
                           <!--商品选择按钮-->
