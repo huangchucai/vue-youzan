@@ -43,15 +43,15 @@
 
 <style>
   .bottom-nav {
-  position: fixed;
-  width: 100%;
-  height: 50px;
-  bottom: 0;
-  background-color: #fff;
-  z-index: 1000;
-  -o-border-image: url(https://b.yzcdn.cn/v2/image/wap/border-line-2.png) 2 stretch;
-  border-image: url(https://b.yzcdn.cn/v2/image/wap/border-line-2.png) 2 stretch;
-  border-top: 2px solid #e5e5e5
+    position: fixed;
+    width: 100%;
+    height: 50px;
+    bottom: 0;
+    background-color: #fff;
+    z-index: 1000;
+    -o-border-image: url(https://b.yzcdn.cn/v2/image/wap/border-line-2.png) 2 stretch;
+    border-image: url(https://b.yzcdn.cn/v2/image/wap/border-line-2.png) 2 stretch;
+    border-top: 2px solid #e5e5e5
 }
 
 @media only screen and (-webkit-min-device-pixel-ratio:1.5),

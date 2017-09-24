@@ -8,11 +8,11 @@ import Velocity from 'velocity-animate'
 import axios from 'axios'
 import mixin from 'js/mixin.js'
 import 'mint-ui/lib/style.css'
-import {MessageBox} from 'mint-ui';
+import { MessageBox } from 'mint-ui';
 
 new Vue({
   el: '#app-cart',
-  data(){
+  data() {
     return {
       cartList: null,
       isShow: false,
@@ -23,7 +23,7 @@ new Vue({
       removeData: null // 删除单个商品信息
     }
   },
-  created(){
+  created() {
     this.getCartDetail()
   },
   computed: {
@@ -91,7 +91,7 @@ new Vue({
     }
   },
   methods: {
-    getCartDetail(){
+    getCartDetail() {
       axios.get(url.cart).then((res) => {
         const lists = res.data.cartList;
         lists.forEach(list => {
@@ -109,7 +109,7 @@ new Vue({
       })
     },
     // 商品选择
-    chooseGoods(shop, goods){
+    chooseGoods(shop, goods) {
       let attr = this.editingShop ? 'removeChecked' : 'checked'
       goods[attr] = !goods[attr];
       shop[attr] = shop.goodsList.every(goods => {
@@ -117,7 +117,7 @@ new Vue({
       })
     },
     // 商铺选择
-    chooseShop(shop){
+    chooseShop(shop) {
       let attr = this.editingShop ? 'removeChecked' : 'checked'
       shop[attr] = !shop[attr]
       shop.goodsList.forEach(goods => {
@@ -154,7 +154,7 @@ new Vue({
       })
     },
     // 减少商品
-    reduce(goods){
+    reduce(goods) {
       if (goods.number === 1) return
       axios.post(url.reduceNum, {
         id: goods.id,
@@ -167,9 +167,9 @@ new Vue({
     },
     // 删除单个商品
     remove(shop, shopIndex, goods, goodsIndex) {
-      this.removeData = {shop, shopIndex, goods, goodsIndex}
+      this.removeData = { shop, shopIndex, goods, goodsIndex }
       MessageBox.confirm('确定要删除当前商品吗？').then(() => {
-        axios.post(url.remove, {id: goods.id}).then((res) => {
+        axios.post(url.remove, { id: goods.id }).then((res) => {
           if (res.status === 200) {
             shop.goodsList.splice(goodsIndex, 1)
             if (!shop.goodsList.length) {
@@ -184,7 +184,7 @@ new Vue({
       // console.log(MessageBox)
     },
     // 删除多个商品
-    removeList(){
+    removeList() {
       MessageBox.confirm('确定要删除当前商品吗？').then(() => {
         let ids = []
         this.removeLists.forEach(goods => {
@@ -224,7 +224,7 @@ new Vue({
       })
     },
     // 移动效果
-    start(e, goods){
+    start(e, goods) {
       goods.startX = e.changedTouches[0].clientX //获取手指的开始触发距最右边的距离
     },
     end(e, shopIndex, goods, goodsIndex) {
@@ -241,6 +241,25 @@ new Vue({
       Velocity(this.$refs[`goods-${shopIndex}-${goodsIndex}`], {
         left
       })
+    }
+  },
+  watch: {
+    cartList: {
+      handler(val) {
+        setTimeout(() => {
+          val.forEach(item => {
+            item.goodsList.forEach(goods => {
+              if (goods.number < 0) {
+                goods.number = 0
+              } else {
+                goods.number = Math.round(goods.number)
+              }
+            })
+          })
+        }, 1000)
+
+      },
+      deep: true
     }
   },
   mixins: [mixin]
